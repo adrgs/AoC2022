@@ -18,17 +18,9 @@ def solve(lines):
             except ValueError:
                 pass
         i += 1
-        
-    visited = set()
 
     grid[start[0]][start[1]] = 'a'
     grid[end[0]][end[1]] = 'z'
-
-    def get_dist(pos):
-        # return manhattan distance between pos and end
-        return abs(pos[0] - end[0]) + abs(pos[1] - end[1])
-
-    MIN_STEPS = float("inf")
 
     queue = [(start, 0)]
     visited = [[0 for _ in range(len(grid[0]))] for __ in range(len(grid))]
@@ -36,11 +28,9 @@ def solve(lines):
     while queue:
         pos, steps = queue.pop(0)
 
-        if steps >= MIN_STEPS:
-            continue
-
         if pos == end:
             print(steps)
+            break
 
         i, j = pos
         if i > 0 and ord(grid[i][j]) + 1 >= ord(grid[i-1][j]) and visited[i-1][j] == 0:
